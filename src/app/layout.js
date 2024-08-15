@@ -1,5 +1,9 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Toolbar from "@/component/Toolbar";
+import Head from "next/head";
+import SearchBar from "@/component/SearchBar";
+import UndoRedoButtons from "@/component/UndoRedoButtons";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,7 +15,32 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <body className="min-h-screen flex flex-col">
+      <Head>
+        <title>Spreadsheet App</title>
+        <meta name="description" content="A virtualized spreadsheet application" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      {/* Header Section */}
+      <header className="bg-gray-800 text-white p-4">
+        <Toolbar/>
+        <SearchBar/>
+        <UndoRedoButtons/>
+      </header>
+
+      {/* Main Content Area */}
+      <main className="flex-grow p-4">
+        {children} {/* This will render the page content */}
+      </main>
+
+      {/* Footer Section */}
+      <footer className="bg-gray-200 text-center p-4">
+        <p>© 2024 Spreadsheet App</p>
+      </footer>
+    </body>
+  </html>
   );
 }
+
+
